@@ -5,5 +5,5 @@ const { join } = require("path");
  */
 module.exports = {
   // Changes the cache location for Puppeteer.
-  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+  executablePath: "/app/.cache/puppeteer",
 };
