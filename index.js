@@ -14,7 +14,6 @@ app.use(express.json());
 const createBrowserInstance = async () => {
   const browser = createBrowser({
     lossyDeviceName: true,
-    executablePath: "./chrome.deb",
   });
   console.log("Browserless factory created");
   app.set("browser", browser);
