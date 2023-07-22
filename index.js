@@ -3,17 +3,18 @@ const app = express();
 const createBrowser = require("browserless");
 const screenshot = require("./routes/screenshot");
 const unshort = require("./routes/unshort");
-
-if (process.env.NODE_ENV !== "production") {
-  const cors = require("cors");
-  app.use(cors());
-}
+const puppeteer = require("puppeteer");
+const dotenv = require("dotenv");
+const PORT = process.env.PORT || 5000;
+dotenv.config();
 
 app.use(express.json());
 
 const createBrowserInstance = async () => {
   const browser = createBrowser({
     lossyDeviceName: true,
+    executablePath:
+      process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(),
   });
   console.log("Browserless factory created");
   app.set("browser", browser);
@@ -24,6 +25,6 @@ createBrowserInstance();
 app.use("/api", unshort);
 app.use("/api", screenshot);
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Server started");
+app.listen(PORT, () => {
+  console.log("Server started on", PORT);
 });

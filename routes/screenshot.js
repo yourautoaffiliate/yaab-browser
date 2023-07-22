@@ -18,7 +18,7 @@ router.get("/capture", async (req, res) => {
     device = "Macbook Pro 13";
   }
 
-  const browser = req.browser;
+  const browser = req.app.get("browser");
 
   let browserless;
   try {

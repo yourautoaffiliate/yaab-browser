@@ -27,12 +27,13 @@ router.get("/unshort", async (req, res) => {
     return res.json({ url: unshorted_url });
   }
 
-  const browser = req.browser;
+  const browser = req.app.get("browser");
 
   let browserless;
   try {
     browserless = await browser.createContext();
   } catch (error) {
+    console.error(error);
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ error: "Failed to create browser context" });
